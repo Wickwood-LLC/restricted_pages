@@ -18,12 +18,12 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     plural = "@count restricted pages",
  *   ),
  *   handlers = {
- *     "list_builder" = "Drupal\restricted_page\RestrictedPageListBuilder",
+ *     "list_builder" = "Drupal\restricted_pages\RestrictedPageListBuilder",
  *     "form" = {
- *       "add" = "Drupal\restricted_page\Form\RestrictedPageForm",
- *       "edit" = "Drupal\restricted_page\Form\RestrictedPageForm",
+ *       "add" = "Drupal\restricted_pages\Form\RestrictedPageForm",
+ *       "edit" = "Drupal\restricted_pages\Form\RestrictedPageForm",
  *       "delete" = "Drupal\Core\Entity\EntityDeleteForm",
- *       "duplicate" = "Drupal\restricted_page\Form\RestrictedPageForm"
+ *       "duplicate" = "Drupal\restricted_pages\Form\RestrictedPageForm"
  *     },
  *     "route_provider" = {
  *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",

@@ -6,7 +6,7 @@ use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Provides a listing of Presentation entities.
+ * Provides a listing of Restricted Page entities.
  */
 class RestrictedPageListBuilder extends ConfigEntityListBuilder {
 

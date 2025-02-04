@@ -2,7 +2,7 @@
 
 restricted_pages.settings:
   type: config_object
-  label: 'Present settings'
+  label: 'Restricted Pages settings'
   mapping:
     user_code_cookied_validity:
       type: string

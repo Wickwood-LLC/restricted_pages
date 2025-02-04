@@ -19,7 +19,7 @@ class UserRegisterForm extends RegisterForm {
     // Build the form using the parent class.
     $form = parent::buildForm($form, $form_state);
 
-    // Presentation registration does not require password and username to set.
+    // restricted_page registration does not require password and username to set.
     $form['account']['pass']['#access'] = FALSE;
     $form['account']['pass']['#required'] = FALSE;
     $form['account']['name']['#access'] = FALSE;
@@ -54,7 +54,7 @@ class UserRegisterForm extends RegisterForm {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $existing_user_id = $form_state->get('existing_user_id');
     if ($existing_user_id) {
-      $this->setPresentationRedirection($existing_user_id, $form_state);
+      $this->setRestrictedPageRedirection($existing_user_id, $form_state);
       \Drupal::messenger()->addMessage('You are already registered!');
     }
     else {
@@ -71,11 +71,11 @@ class UserRegisterForm extends RegisterForm {
     if (!$existing_user_id) {
       parent::save($form, $form_state);
       $account = $form_state->get('user');
-      $this->setPresentationRedirection($account->id(), $form_state);
+      $this->setRestrictedPageRedirection($account->id(), $form_state);
     }
   }
 
-  protected function setPresentationRedirection($user_id, FormStateInterface $form_state) {
+  protected function setRestrictedPageRedirection($user_id, FormStateInterface $form_state) {
     $config = \Drupal::config('restricted_pages.settings');
     $restricted_page_id = $form_state->get('restricted_page_id');
     /** @var \Drupal\restricted_pages\ParamConverter\UserCodeToEntityConverter */

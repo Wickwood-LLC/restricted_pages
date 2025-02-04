@@ -24,10 +24,10 @@ class RestrictedPageController extends ControllerBase {
     if ($user->isAnonymous()) {
       $user_code = $request->cookies->get('user_code');
       if (!empty($user_code)) {
-        $url = Url::fromRoute('restricted_pages.restricted_page.' . $restricted_page->id(), ['user' => $user_code, 'presentation' => $restricted_page->id()]);
+        $url = Url::fromRoute('restricted_pages.restricted_page.' . $restricted_page->id(), ['user' => $user_code, 'restricted_page' => $restricted_page->id()]);
       }
       else {
-        $url = Url::fromRoute('restricted_pages.restricted_page_registration.' . $restricted_page->id(), ['presentation' => $restricted_page]);
+        $url = Url::fromRoute('restricted_pages.restricted_page_registration.' . $restricted_page->id(), ['restricted_page' => $restricted_page]);
       }
       return new RedirectResponse($url->toString());
     }
@@ -38,7 +38,7 @@ class RestrictedPageController extends ControllerBase {
     setcookie('user_code', $user_code, time() + $config->get('user_code_cookied_validity') * 24 * 60 * 60, '/');
 
     return [
-      'presentation' => [
+      'restricted_page' => [
         '#type' => 'restricted_page',
         '#restricted_page' => $restricted_page,
         '#cache' => [
@@ -49,7 +49,7 @@ class RestrictedPageController extends ControllerBase {
   }
 
   /**
-   * The _title_callback for the presentaiton page
+   * The _title_callback for the restricted_page
    *
    * @param \Drupal\restricted_pages\Entity\RestrictedPage $restricted_page
    *   The restricted_page.
@@ -62,7 +62,7 @@ class RestrictedPageController extends ControllerBase {
   }
 
   /**
-   * The _title_callback for the presentaiton registration page
+   * The _title_callback for the restricted_page registration
    *
    * @param \Drupal\restricted_pages\Entity\RestrictedPage $restricted_page
    *   The restricted_page.

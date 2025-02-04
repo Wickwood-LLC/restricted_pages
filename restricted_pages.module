@@ -5,7 +5,7 @@ use Drupal\Core\Template\Attribute;
 /**
  * Implements hook_theme().
  */
-function present_theme() {
+function restricted_pages_theme() {
   return [
     'restricted_page' => [
       'render element' => 'restricted_page',
