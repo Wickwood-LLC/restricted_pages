@@ -1,0 +1,33 @@
+<?php
+
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_theme().
+ */
+function present_theme() {
+  return [
+    'restricted_page' => [
+      'render element' => 'restricted_page',
+    ],
+  ];
+}
+
+function template_preprocess_restricted_page(&$variables) {
+  $restricted_page = $variables['restricted_page'];
+  $variables['attributes'] = new Attribute($restricted_page['#attributes']);
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function restricted_pages_entity_type_alter(array &$entity_types) {
+  // Check if the user entity type exists.
+  if (isset($entity_types['user'])) {
+    $config = \Drupal::config('restricted_pages.settings');
+    $form_mode = $config->get('registration_form_mode');
+    if ($form_mode != 'default') {
+      $entity_types['user']->setFormClass($form_mode, 'Drupal\restricted_pages\Form\UserRegisterForm');
+    }
+  }
+}

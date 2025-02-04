@@ -1,0 +1,8 @@
+services:
+  restricted_pages.user_code:
+    class: Drupal\restricted_pages\ParamConverter\UserCodeToEntityConverter
+    tags:
+      - { name: paramconverter }
+  restricted_pages.route_subscriber:
+    class: Drupal\restricted_pages\EventSubscriber\RouteSubscriber
+    arguments: ['@entity_type.manager']

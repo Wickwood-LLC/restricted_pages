@@ -1,0 +1,3 @@
+administer restricted_page:
+  title: 'Administer Restricted Pages'
+  description: 'Allows users to manage Restricted Pages.'

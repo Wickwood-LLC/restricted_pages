@@ -1,0 +1,11 @@
+restricted_pages.settings:
+  title: 'Restricted Pages'
+  description: 'Configure the Restricted Pages module.'
+  route_name: restricted_pages.settings
+  parent: system.admin_config_ui
+
+entity.restricted_page.collection:
+  title: 'Restricted Pages'
+  route_name: entity.restricted_page.collection
+  description: 'Manage Restricted Pages.'
+  parent: system.admin_structure

@@ -1,0 +1,51 @@
+restricted_pages.settings:
+  path: '/admin/config/user-interface/restricted-pages'
+  defaults:
+    _form: '\Drupal\restricted_pages\Form\SettingsForm'
+    _title: 'Restricted Pages Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+route_callbacks:
+  - 'restricted_pages.route_subscriber:routes'
+
+entity.restricted_page.collection:
+  path: '/admin/structure/restricted-page'
+  defaults:
+    _entity_list: 'restricted_page'
+    _title: 'Restricted Pages'
+  requirements:
+    _permission: 'administer restricted_page'
+
+entity.restricted_page.add_form:
+  path: '/admin/structure/restricted-page/add'
+  defaults:
+    _entity_form: 'restricted_page.add'
+    _title: 'Add Restricted Page'
+  requirements:
+    _permission: 'administer restricted_page'
+
+entity.restricted_page.edit_form:
+  path: '/admin/structure/restricted-page/{restricted_page}/edit'
+  defaults:
+    _entity_form: 'restricted_page.edit'
+    _title: 'Edit Restricted Page'
+  requirements:
+    _permission: 'administer restricted_page'
+
+entity.restricted_page.duplicate_form:
+  path: '/admin/structure/restricted-page/{restricted_page}/duplicate'
+  defaults:
+    _entity_form: 'restricted_page.duplicate'
+    _title: 'Duplicate Restricted Page'
+  requirements:
+    _permission: 'administer restricted_page'
+
+entity.restricted_page.delete_form:
+  path: '/admin/structure/restricted-page/{restricted_page}/delete'
+  defaults:
+    _entity_form: 'restricted_page.delete'
+    _title: 'Delete Restricted Page'
+  requirements:
+    _permission: 'administer restricted_page'
+    
