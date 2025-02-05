@@ -28,7 +28,7 @@ class RestrictedPageListBuilder extends ConfigEntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /** @var \Drupal\restricted_pages\Entity\RestrictedPage $entity */
     $row['id'] = $entity->id();
-    $row['title'] = $entity->getLabel();
+    $row['title'] = $entity->toLink(NULL, 'edit-form')->toString();
     $row['status'] = $entity->getStatus() ? $this->t('Enabled') : $this->t('Disabled');
     return $row + parent::buildRow($entity);
   }
