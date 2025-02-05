@@ -160,6 +160,22 @@ class RestrictedPage extends ConfigEntityBase implements SectionListInterface {
   /**
    * {@inheritdoc}
    */
+  public function postSave(EntityStorageInterface $storage, $update = TRUE) {
+    parent::postSave($storage, $update);
+
+    // Rebuild the router if this is a new page, or its status changed or its path changed.
+    if (
+      !isset($this->original) ||
+      ($this->status() != $this->original->status()) ||
+      ($this->getPath() != $this->original->getPath())
+    ) {
+      \Drupal::service('router.builder')->setRebuildNeeded();
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function preDelete(EntityStorageInterface $storage, array $entities) {
 
     /** @var \Drupal\layout_builder\LayoutTempstoreRepositoryInterface */
