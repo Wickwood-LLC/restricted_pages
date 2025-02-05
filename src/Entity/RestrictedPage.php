@@ -2,7 +2,10 @@
 
 namespace Drupal\restricted_pages\Entity;
 
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Plugin\Context\EntityContext;
 use Drupal\layout_builder\SectionListInterface;
 use Drupal\layout_builder\SectionListTrait;
 
@@ -152,5 +155,30 @@ class RestrictedPage extends ConfigEntityBase implements SectionListInterface {
   protected function setSections(array $sections) {
     $this->sections = array_values($sections);
     return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function preDelete(EntityStorageInterface $storage, array $entities) {
+
+    /** @var \Drupal\layout_builder\LayoutTempstoreRepositoryInterface */
+    $layoutTempstoreRepository = \Drupal::service('layout_builder.tempstore_repository');
+    // Delete all temporary layout builder section storage for this entity.
+    // Or it cause issues when a another entity creaerd with same name or when re-installed this module.
+    foreach ($entities as $entity) {
+      $contextRepository = \Drupal::service('context.repository');
+      $contexts = $contextRepository->getAvailableContexts();
+      $contexts['display'] = EntityContext::fromEntity($entity);
+      $contexts['layout_builder.entity'] = EntityContext::fromEntity($entity);
+
+      $sectionStorageManager = \Drupal::service('plugin.manager.layout_builder.section_storage');
+
+      // Get section storage to pass to contexts hook.
+      $cacheability = new CacheableMetadata();
+      $section_storage = $sectionStorageManager->findByContext($contexts, $cacheability);
+      $layoutTempstoreRepository->delete($section_storage);
+    }
+    return parent::preDelete($storage, $entities);
   }
 }
