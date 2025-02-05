@@ -22,7 +22,6 @@ use Drupal\layout_builder\SectionListTrait;
  *   handlers = {
  *     "storage" = "Drupal\restricted_pages\Entity\RestrictedPageStorage",
  *     "list_builder" = "Drupal\restricted_pages\RestrictedPageListBuilder",
- *     "view_builder" = "Drupal\restricted_pages\Entity\RestrictedPageViewBuilder",
  *     "form" = {
  *       "add" = "Drupal\restricted_pages\Form\RestrictedPageForm",
  *       "edit" = "Drupal\restricted_pages\Form\RestrictedPageForm",
@@ -43,7 +42,7 @@ use Drupal\layout_builder\SectionListTrait;
  *   },
  *   links = {
  *     "add-form" = "/admin/structure/restricted-page/add",
- *     "edit-form" = "/admin/structure/restricted-page/{restricted_page}/edit",
+ *     "edit-form" = "/admin/structure/restricted-page/{restricted_page}",
  *     "delete-form" = "/admin/structure/restricted-page/{restricted_page}/delete",
  *     "duplicate-form" = "/admin/structure/restricted-page/{restricted_page}/duplicate",
  *     "collection" = "/admin/structure/restricted-page",
