@@ -1,0 +1,8 @@
+restricted_page.edit:
+  route_name: entity.restricted_page.edit_form
+  title: 'Edit'
+  base_route: entity.restricted_page.edit_form
+restricted_page.layout:
+  route_name: layout_builder.restricted_page.view
+  title: 'Layout'
+  base_route: entity.restricted_page.edit_form

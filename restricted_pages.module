@@ -16,6 +16,7 @@ function restricted_pages_theme() {
 function template_preprocess_restricted_page(&$variables) {
   $restricted_page = $variables['restricted_page'];
   $variables['attributes'] = new Attribute($restricted_page['#attributes']);
+  $variables['content'] = $restricted_page['#content'];
 }
 
 /**

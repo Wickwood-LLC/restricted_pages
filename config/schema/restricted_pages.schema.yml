@@ -27,3 +27,7 @@ restricted_pages.restricted_page.*:
     path:
       type: string
       label: 'Path'
+    sections:
+      type: sequence
+      sequence:
+        type: layout_builder.section
