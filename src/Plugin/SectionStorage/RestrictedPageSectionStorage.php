@@ -161,14 +161,6 @@ class RestrictedPageSectionStorage extends SectionStorageBase implements Contain
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function getContextsDuringPreview() {
-    $contexts = parent::getContextsDuringPreview();
-    return $contexts;
-  }
-
-  /**
    * Derives the available plugin contexts from route values.
    *
    * This should only be called during section storage instantiation,
