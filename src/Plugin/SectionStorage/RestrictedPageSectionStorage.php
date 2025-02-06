@@ -8,11 +8,8 @@ use Drupal\Core\Config\Entity\ThirdPartySettingsInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Plugin\Context\Context;
-use Drupal\Core\Plugin\Context\ContextDefinition;
 use Drupal\Core\Plugin\Context\EntityContext;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\layout_builder\Entity\SampleEntityGeneratorInterface;
 use Drupal\layout_builder\Plugin\SectionStorage\SectionStorageBase;
@@ -101,30 +98,6 @@ class RestrictedPageSectionStorage extends SectionStorageBase implements Contain
   }
 
   /**
-   * Derives the section list from the storage ID.
-   *
-   * @param string $id
-   *   The storage ID, see ::getStorageId().
-   *
-   * @return \Drupal\layout_builder\SectionListInterface
-   *   The section list.
-   *
-   * @throws \InvalidArgumentException
-   *   Thrown if the ID is invalid.
-   *
-   * @internal
-   *   This should only be called during section storage instantiation.
-   *
-   * @deprecated in Drupal 8.7.0 and will be removed before Drupal 9.0.0. The
-   *   section list should be derived from context. See
-   *   https://www.drupal.org/node/3016262.
-   */
-  // public function getSectionListFromId($id) {
-  //   @trigger_error('\Drupal\layout_builder\SectionStorageInterface::getSectionListFromId() is deprecated in Drupal 8.7.0 and will be removed before Drupal 9.0.0. The section list should be derived from context. See https://www.drupal.org/node/3016262.', E_USER_DEPRECATED);
-  //   return $this->entityTypeManager->getStorage('restricted_pages')->load($id);
-  // }
-
-  /**
    * Provides the routes needed for Layout Builder UI.
    *
    * Allows the plugin to add or alter routes during the route building process.
@@ -188,66 +161,10 @@ class RestrictedPageSectionStorage extends SectionStorageBase implements Contain
   }
 
   /**
-   * Configures the plugin based on route values.
-   *
-   * @param mixed $value
-   *   The raw value.
-   * @param mixed $definition
-   *   The parameter definition provided in the route options.
-   * @param string $name
-   *   The name of the parameter.
-   * @param array $defaults
-   *   The route defaults array.
-   *
-   * @return string|null
-   *   The section storage ID if it could be extracted, NULL otherwise.
-   *
-   * @internal
-   *   This should only be called during section storage instantiation.
-   *
-   * @deprecated in Drupal 8.7.0 and will be removed before Drupal 9.0.0.
-   *   \Drupal\layout_builder\SectionStorageInterface::deriveContextsFromRoute()
-   *   should be used instead. See https://www.drupal.org/node/3016262.
-   */
-  // public function extractIdFromRoute($value, $definition, $name, array $defaults) {
-  //   throw new \Exception(new TranslatableMarkup('This method is deprecated in 8.7.0'));
-  //   return NULL;
-  // }
-
-  /**
    * {@inheritdoc}
    */
   public function getContextsDuringPreview() {
     $contexts = parent::getContextsDuringPreview();
-
-    // foreach ($this->getRestrictedPage()->required_context as $machine_name => $info) {
-    //   if (strpos($info['type'], 'entity:') === 0) {
-    //     list(,$entity_type_id, $bundle) = explode(':', $info['type'], 3);
-
-    //     if (!$bundle) {
-    //       $bundle = $entity_type_id;
-    //       if ($this->entityTypeManager->getDefinition($entity_type_id)->hasKey('bundle')) {
-    //         if (!empty($info['bundle'])) {
-    //           $bundle = $info['bundle'];
-    //         } else {
-    //           $bundle = key($this->entityBundleInfo->getBundleInfo($entity_type_id));
-    //         }
-    //       }
-    //     }
-
-    //     $sample = $this->sampleEntityGenerator->get($entity_type_id, $bundle);
-    //     $contexts[$machine_name] = new Context(
-    //       new ContextDefinition($info['type'], $info['label'], !empty($info['required']), FALSE, '', $sample),
-    //       $sample
-    //     );
-    //   }
-    //   else {
-    //     $contexts[$machine_name] = new Context(
-    //       new ContextDefinition($info['type'], $info['label'], !empty($info['required']), FALSE)
-    //     );
-    //   }
-    // }
-
     return $contexts;
   }
 
