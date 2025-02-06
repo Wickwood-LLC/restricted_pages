@@ -38,6 +38,12 @@ class RestrictedPageForm extends EntityForm {
 
     /** @var \Drupal\restricted_pages\Entity\RestrictedPage $restricted_page */
 
+    if ($this->operation == 'edit') {
+      $form['#title'] = $this->t('<em>Edit Restricted Page</em> @title', [
+        '@title' => $restricted_page->label(),
+      ]);
+    }
+
     $form['#attributes']['id'] = 'restricted-page-' . $restricted_page->isNew() ? 'new' : $restricted_page->id();
 
     $form['label'] = [
