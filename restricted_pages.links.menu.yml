@@ -8,4 +8,4 @@ entity.restricted_page.collection:
   title: 'Restricted Pages'
   route_name: entity.restricted_page.collection
   description: 'Manage Restricted Pages.'
-  parent: system.admin_structure
+  parent: system.admin_content
