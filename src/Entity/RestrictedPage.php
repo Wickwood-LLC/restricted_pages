@@ -44,11 +44,11 @@ use Drupal\layout_builder\SectionListTrait;
  *     "status" = "status",
  *   },
  *   links = {
- *     "add-form" = "/admin/structure/restricted-page/add",
- *     "edit-form" = "/admin/structure/restricted-page/{restricted_page}",
- *     "delete-form" = "/admin/structure/restricted-page/{restricted_page}/delete",
- *     "duplicate-form" = "/admin/structure/restricted-page/{restricted_page}/duplicate",
- *     "collection" = "/admin/structure/restricted-page",
+ *     "add-form" = "/admin/content/restricted-page/add",
+ *     "edit-form" = "/admin/content/restricted-page/{restricted_page}",
+ *     "delete-form" = "/admin/content/restricted-page/{restricted_page}/delete",
+ *     "duplicate-form" = "/admin/content/restricted-page/{restricted_page}/duplicate",
+ *     "collection" = "/admin/content/restricted-page",
  *   },
  *   config_export = {
  *     "id",

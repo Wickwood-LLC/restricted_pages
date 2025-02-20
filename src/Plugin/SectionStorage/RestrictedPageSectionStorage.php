@@ -114,7 +114,7 @@ class RestrictedPageSectionStorage extends SectionStorageBase implements Contain
     $this->buildLayoutRoutes(
       $collection,
       $this->getPluginDefinition(),
-      'admin/structure/restricted-page/{restricted_page}/layout',
+      'admin/content/restricted-page/{restricted_page}/layout',
       [
         'parameters' => [
           'restricted_page' => [
