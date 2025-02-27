@@ -11,3 +11,6 @@ restricted_page.layout:
   route_name: layout_builder.restricted_page.view
   title: 'Layout'
   base_route: entity.restricted_page.edit_form
+
+restricted_page.view:
+  deriver: 'Drupal\restricted_pages\Plugin\Derivative\DynamicLocalTasks'
