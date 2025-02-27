@@ -197,4 +197,27 @@ class RestrictedPage extends ConfigEntityBase implements SectionListInterface {
     }
     return parent::preDelete($storage, $entities);
   }
+
+  public function getRouteId($action = 'view') {
+    if ($action == 'view') {
+      return 'restricted_pages.restricted_page.' . $this->id();
+    }
+    else if ($action == 'edit') {
+      return 'restricted_pages.restricted_page.' . $this->id() . '.edit';
+    }
+    else if ($action == 'delete') {
+      return 'restricted_pages.restricted_page.' . $this->id() . '.delete';
+    }
+    else if ($action == 'duplicate') {
+      return 'restricted_pages.restricted_page.' . $this->id() . '.duplicate';
+    }
+    else if ($action == 'layout_builder') {
+      return 'restricted_pages.restricted_page.' . $this->id() . '.layout_builder';
+    }
+    else if ($action == 'registration') {
+      return 'restricted_pages.restricted_page.' . $this->id() . '.registration';
+    }
+
+    return throw new \Exception('Invalid action');
+  }
 }

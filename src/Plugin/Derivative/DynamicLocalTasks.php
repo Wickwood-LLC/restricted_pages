@@ -55,12 +55,41 @@ class DynamicLocalTasks extends DeriverBase implements ContainerDeriverInterface
   public function getDerivativeDefinitions($base_plugin_definition) {
     $restricted_pages = $this->restrictedPageStorage->loadByProperties(['status' => TRUE]);
     foreach ($restricted_pages as $restricted_page) {
-      $id = 'restricted_pages.restricted_page.' . $restricted_page->id();
-      $this->derivatives[$id] = [
-        'route_name' => $id,
+      /** @var \Drupal\restricted_pages\Entity\RestrictedPage $restricted_page */
+      $view_route = $restricted_page->getRouteId();
+      $this->derivatives[$view_route] = [
+        'route_name' => $view_route,
         'title' => $this->t('View'),
-        'base_route' => 'entity.restricted_page.edit_form',
-        'weight' => -100,
+        'base_route' => $view_route,
+        'weight' => 1,
+      ];
+
+      $this->derivatives[$restricted_page->getRouteId('edit')] = [
+        'route_name' => $restricted_page->getRouteId('edit'),
+        'title' => $this->t('Edit'),
+        'base_route' => $view_route,
+        'weight' => 3,
+      ];
+
+      $this->derivatives[$restricted_page->getRouteId('layout_builder')] = [
+        'route_name' => $restricted_page->getRouteId('layout_builder'),
+        'title' => $this->t('Layout'),
+        'base_route' => $view_route,
+        'weight' => 5,
+      ];
+
+      $this->derivatives[$restricted_page->getRouteId('duplicate')] = [
+        'route_name' => $restricted_page->getRouteId('duplicate'),
+        'title' => $this->t('Duplicate'),
+        'base_route' => $view_route,
+        'weight' => 7,
+      ];
+
+      $this->derivatives[$restricted_page->getRouteId('delete')] = [
+        'route_name' => $restricted_page->getRouteId('delete'),
+        'title' => $this->t('Delete'),
+        'base_route' => $view_route,
+        'weight' => 9,
       ];
     }
     return $this->derivatives;

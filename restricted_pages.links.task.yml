@@ -3,14 +3,5 @@ entity.restricted_page.collection:
   route_name: entity.restricted_page.collection
   base_route: system.admin_content
 
-restricted_page.edit:
-  route_name: entity.restricted_page.edit_form
-  title: 'Edit'
-  base_route: entity.restricted_page.edit_form
-restricted_page.layout:
-  route_name: layout_builder.restricted_page.view
-  title: 'Layout'
-  base_route: entity.restricted_page.edit_form
-
 restricted_page.view:
   deriver: 'Drupal\restricted_pages\Plugin\Derivative\DynamicLocalTasks'

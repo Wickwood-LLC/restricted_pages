@@ -38,12 +38,21 @@ class RestrictedPageListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function getOperations(EntityInterface $entity) {
+    /** @var \Drupal\restricted_pages\Entity\RestrictedPage $entity */
     $operations = [
       'layout' => [
         'title' => new TranslatableMarkup('Manage Layout'),
         'weight' => 1,
         'url' => Url::fromRoute(
           'layout_builder.restricted_page.view',
+          [ 'restricted_page' => $entity->id() ]
+        ),
+      ],
+      'duplicate' => [
+        'title' => new TranslatableMarkup('Duplicate'),
+        'weight' => 2,
+        'url' => Url::fromRoute(
+          $entity->getRouteId('duplicate'),
           [ 'restricted_page' => $entity->id() ]
         ),
       ],

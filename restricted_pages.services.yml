@@ -6,3 +6,5 @@ services:
   restricted_pages.route_subscriber:
     class: Drupal\restricted_pages\EventSubscriber\RouteSubscriber
     arguments: ['@entity_type.manager']
+    tags:
+      - { name: event_subscriber }

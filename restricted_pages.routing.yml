@@ -25,27 +25,27 @@ entity.restricted_page.add_form:
   requirements:
     _permission: 'administer restricted_page'
 
-entity.restricted_page.edit_form:
-  path: '/admin/content/restricted-page/{restricted_page}'
-  defaults:
-    _entity_form: 'restricted_page.edit'
-    _title: 'Edit Restricted Page'
-  requirements:
-    _permission: 'administer restricted_page'
+# entity.restricted_page.edit_form:
+#   path: '/admin/content/restricted-page/{restricted_page}'
+#   defaults:
+#     _entity_form: 'restricted_page.edit'
+#     _title: 'Edit Restricted Page'
+#   requirements:
+#     _permission: 'administer restricted_page'
 
-entity.restricted_page.duplicate_form:
-  path: '/admin/content/restricted-page/{restricted_page}/duplicate'
-  defaults:
-    _entity_form: 'restricted_page.duplicate'
-    _title: 'Duplicate Restricted Page'
-  requirements:
-    _permission: 'administer restricted_page'
+# entity.restricted_page.duplicate_form:
+#   path: '/admin/content/restricted-page/{restricted_page}/duplicate'
+#   defaults:
+#     _entity_form: 'restricted_page.duplicate'
+#     _title: 'Duplicate Restricted Page'
+#   requirements:
+#     _permission: 'administer restricted_page'
 
-entity.restricted_page.delete_form:
-  path: '/admin/content/restricted-page/{restricted_page}/delete'
-  defaults:
-    _entity_form: 'restricted_page.delete'
-    _title: 'Delete Restricted Page'
-  requirements:
-    _permission: 'administer restricted_page'
+# entity.restricted_page.delete_form:
+#   path: '/admin/content/restricted-page/{restricted_page}/delete'
+#   defaults:
+#     _entity_form: 'restricted_page.delete'
+#     _title: 'Delete Restricted Page'
+#   requirements:
+#     _permission: 'administer restricted_page'
     

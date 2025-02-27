@@ -22,10 +22,10 @@ class RestrictedPageController extends ControllerBase {
     if ($user->isAnonymous()) {
       $user_code = $request->cookies->get('user_code');
       if (!empty($user_code)) {
-        $url = Url::fromRoute('restricted_pages.restricted_page.' . $restricted_page->id(), ['user' => $user_code, 'restricted_page' => $restricted_page->id()]);
+        $url = Url::fromRoute($restricted_page->getRouteId(), ['user' => $user_code, 'restricted_page' => $restricted_page]);
       }
       else {
-        $url = Url::fromRoute('restricted_pages.restricted_page_registration.' . $restricted_page->id(), ['restricted_page' => $restricted_page]);
+        $url = Url::fromRoute($restricted_page->getRouteId('registration'), ['restricted_page' => $restricted_page]);
       }
       return new RedirectResponse($url->toString());
     }
