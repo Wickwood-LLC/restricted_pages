@@ -20,13 +20,27 @@ class RestrictedPageController extends ControllerBase {
   public function restrictedPage(Request $request, UserInterface $user, RestrictedPage $restricted_page) {
 
     if ($user->isAnonymous()) {
+      // No user code in the path.
+
+      // Check if user code is in the cookie.
       $user_code = $request->cookies->get('user_code');
-      if (!empty($user_code)) {
-        $url = Url::fromRoute($restricted_page->getRouteId(), ['user' => $user_code, 'restricted_page' => $restricted_page]);
+      if (empty($user_code)) {
+        // No user code in the cookie.
+        $current_user = \Drupal::currentUser();
+        if ($current_user->isAnonymous()) {
+          // Let the anonymous user register.
+          $url = Url::fromRoute($restricted_page->getRouteId('registration'), ['restricted_page' => $restricted_page]);
+          return new RedirectResponse($url->toString());
+        }
+        else {
+          /** @var \Drupal\restricted_pages\ParamConverter\UserCodeToEntityConverter */
+          $user_code_service = \Drupal::service('restricted_pages.user_code');
+          $user_code = $user_code_service->getUserCode($current_user->id());
+        }
       }
-      else {
-        $url = Url::fromRoute($restricted_page->getRouteId('registration'), ['restricted_page' => $restricted_page]);
-      }
+
+      // Redirect to the restricted page with the user code added in the path.
+      $url = Url::fromRoute($restricted_page->getRouteId(), ['user' => $user_code, 'restricted_page' => $restricted_page]);
       return new RedirectResponse($url->toString());
     }
 
