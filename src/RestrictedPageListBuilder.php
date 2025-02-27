@@ -4,6 +4,7 @@ namespace Drupal\restricted_pages;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Link;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 
@@ -28,7 +29,7 @@ class RestrictedPageListBuilder extends ConfigEntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /** @var \Drupal\restricted_pages\Entity\RestrictedPage $entity */
     $row['id'] = $entity->id();
-    $row['title'] = $entity->toLink(NULL, 'edit-form')->toString();
+    $row['label'] =  new Link($entity->label(), Url::fromRoute('restricted_pages.restricted_page.' . $entity->id()));
     $row['status'] = $entity->getStatus() ? $this->t('Enabled') : $this->t('Disabled');
     return $row + parent::buildRow($entity);
   }
