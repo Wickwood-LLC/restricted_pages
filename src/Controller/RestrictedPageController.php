@@ -19,8 +19,6 @@ class RestrictedPageController extends ControllerBase {
    */
   public function restrictedPage(Request $request, UserInterface $user, RestrictedPage $restricted_page) {
 
-    $slides = [];
-
     if ($user->isAnonymous()) {
       $user_code = $request->cookies->get('user_code');
       if (!empty($user_code)) {
