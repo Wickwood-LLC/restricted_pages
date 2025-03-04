@@ -1,6 +1,8 @@
 <?php
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Template\Attribute;
+use Drupal\user\UserInterface;
 
 /**
  * Implements hook_theme().
@@ -30,5 +32,39 @@ function restricted_pages_entity_type_alter(array &$entity_types) {
     if ($form_mode != 'default') {
       $entity_types['user']->setFormClass($form_mode, 'Drupal\restricted_pages\Form\UserRegisterForm');
     }
+  }
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function restricted_pages_entity_extra_field_info() {
+  $extra = [];
+  $extra['user']['user']['display']['user_code'] = [
+    'label' => t('User code'),
+    'description' => t('The user code to use in restricted page path to grant access.'),
+    'weight' => 0,
+    'visible' => FALSE,
+  ];
+  return $extra;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function restricted_pages_user_view(array &$build, UserInterface $user, EntityViewDisplayInterface $display, $view_mode) {
+  if ($display->getComponent('user_code')) {
+    /** @var \Drupal\restricted_pages\ParamConverter\UserCodeToEntityConverter */
+    $user_code_service = \Drupal::service('restricted_pages.user_code');
+    $user_code = $user_code_service->getUserCode($user->id());
+
+    $build['user_code'] = [
+      '#type' => 'inline_template',
+      '#template' => '<h4 class="label">{{ label }}</h4> <input type="text" value="{{ user_code }}" readonly>',
+      '#context' => [
+        'label' => t('User Code'),
+        'user_code' => $user_code,
+      ],
+    ];
   }
 }
