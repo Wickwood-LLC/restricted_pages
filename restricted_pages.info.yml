@@ -1,6 +1,6 @@
 name: Restricted Pages
 type: module
 description: "Pages that are restricted by some logic."
-core_version_requirement: ^10.3
+core_version_requirement: ^10.3 || ^11
 dependencies:
   - eca:eca
